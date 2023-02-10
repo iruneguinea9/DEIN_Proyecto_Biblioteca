@@ -1,0 +1,64 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button{
+	-fx-background-radius: 15px;
+	-fx-font:bold 9pt"Arial";  
+	-fx-color: #D48CF0;
+}
+.button:hover { 
+	-fx-background-color: #A66DBD ;
+
+}
+.table-view .column-header-background{
+	-fx-color: #634170;
+	-fx-font-family: "Courier New";
+	-fx-text-color: white;
+	
+}
+
+.table-row-cell:selected {
+	-fx-background-color:#D48CF0;
+}
+.table-row-cell:hover {
+    -fx-background-color: #ff9df0;
+}
+
+.text-field{
+	-fx-background-radius: 15px ;
+}
+.text-field:focused {
+	-fx-background-color: #D48CF0;
+
+}
+.tab-pane .tab-header-area .tab-header-background {
+	-fx-background-color: #D48CF0;
+	-fx-text-fill: white;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.tab:selected {
+    -fx-alignment: CENTER;
+    -fx-background-color: #A66DBD;
+    -fx-text-fill: WHITE;
+    
+}
+.root{
+	-fx-background-color: #EAD5F2;
+}
+.menu-bar{
+	-fx-background-color: #D48CF0;
+	-fx-text-fill: WHITE;
+}
+.menu:hover{
+	-fx-background-color: #A66DBD ;
+}
+.menu:selected{
+	-fx-background-color: #A66DBD ;
+}
+.menu-item:hover{
+	-fx-background-color: #A66DBD;
+}
+.menu-item{
+	-fx-background-color: #D48CF0;
+}

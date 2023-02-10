@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<GridPane fx:id="gridGrande" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VentanaPrincipalController">
+	<columnConstraints>
+		<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints fillHeight="false" vgrow="NEVER" />
+		<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+		<RowConstraints minHeight="10.0" prefHeight="411.0" vgrow="ALWAYS" />
+	</rowConstraints>
+	<children>
+		<TabPane tabClosingPolicy="UNAVAILABLE" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+			<tabs>
+				<Tab text="%label2">
+					<content>
+						<GridPane fx:id="grid1" prefHeight="436.0" prefWidth="897.0">
+							<columnConstraints>
+								<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+								<ColumnConstraints hgrow="ALWAYS" maxWidth="242.0" minWidth="10.0" prefWidth="242.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+							</rowConstraints>
+							<children>
+								<VBox alignment="CENTER" prefHeight="418.0" prefWidth="242.0" spacing="45.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+									<children>
+										<Button fx:id="nuevoLibroBtn" mnemonicParsing="false" onAction="#nuevoLibroBtn" prefWidth="100.0" text="%boton1">
+											<graphic>
+												<FontIcon iconLiteral="far-plus-square" iconSize="20" selectionEnd="1" selectionFill="#070707" wrappingWidth="20.0" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Añadir un libro a la biblioteca" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="bajaLibroBtn" mnemonicParsing="false" onAction="#bajaLibroBtn" prefHeight="28.0" prefWidth="172.0" text="%boton2">
+											<graphic>
+												<FontIcon iconLiteral="far-eye-slash" iconSize="20" selectionEnd="1" textAlignment="CENTER" wrappingWidth="27.0" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Dar de baja un libro de la biblioteca" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="editarLibroBtn" mnemonicParsing="false" onAction="#editarLibroBtn" prefHeight="28.0" prefWidth="101.0" text="%boton3">
+											<graphic>
+												<FontIcon iconLiteral="far-edit" iconSize="20" selectionEnd="1" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Editar un libro (debes seleccionar uno de la tabla)" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="consultarLibroBtn" mnemonicParsing="false" onAction="#consultarLibroBtn" text="%boton4">
+											<graphic>
+												<FontIcon iconLiteral="far-question-circle" iconSize="20" text="" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Hacer consultas sobre libros" />
+                                 </tooltip>
+										</Button>
+									</children>
+									<GridPane.margin>
+										<Insets />
+									</GridPane.margin>
+								</VBox>
+								<TableView fx:id="tablaLibros" onMouseClicked="#clickTabla" prefHeight="200.0" prefWidth="200.0" GridPane.vgrow="ALWAYS">
+									<columns>
+										<TableColumn fx:id="portadaCol" prefWidth="102.0" text="%tabla11" />
+										<TableColumn fx:id="tituloLibroCol" prefWidth="121.0" text="%tabla12" />
+										<TableColumn fx:id="autorCol" prefWidth="128.0" text="%tabla13" />
+										<TableColumn fx:id="editorialCol" prefWidth="120.0" text="%tabla14" />
+										<TableColumn fx:id="estadoCol" prefWidth="139.0" text="%tabla15" />
+									</columns>
+									<GridPane.margin>
+										<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+									</GridPane.margin>
+								</TableView>
+							</children>
+						</GridPane>
+					</content>
+				</Tab>
+				<Tab text="%label3">
+					<content>
+						<GridPane fx:id="grid2" alignment="CENTER" prefHeight="466.0" prefWidth="882.0">
+							<columnConstraints>
+								<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+								<ColumnConstraints hgrow="ALWAYS" minWidth="8.0" />
+								<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="27.0" vgrow="NEVER" />
+								<RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+							</rowConstraints>
+							<children>
+								<TableView fx:id="tablaPrestamos" onMouseClicked="#clickPrestamo" prefHeight="200.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+									<columns>
+										<TableColumn fx:id="alumnoCol" prefWidth="120.0" text="%tabla21" />
+										<TableColumn fx:id="tituloPrestamoCol" prefWidth="114.0" text="%tabla22" />
+										<TableColumn fx:id="fechaPrestamoCol" prefWidth="169.0" text="%tabla23" />
+									</columns>
+									<GridPane.margin>
+										<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+									</GridPane.margin>
+								</TableView>
+								<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="45.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
+									<children>
+										<Button fx:id="prestarBtn" mnemonicParsing="false" onAction="#prestarBtn" text="%boton5">
+											<graphic>
+												<FontIcon iconLiteral="far-handshake" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Prestar un libro (puedes seleccionarlo de la lista o elegir uno en la ventana emergente)" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="devolverBtn" mnemonicParsing="false" onAction="#devolverBtn" text="%boton6">
+											<graphic>
+												<FontIcon iconLiteral="fas-reply" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Devolver un libro (puedes elegir uno en la tabla o en la ventana emergente)" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="consultarPrestamosBtn" mnemonicParsing="false" onAction="#consultarPrestamosBtn" text="%boton4">
+											<graphic>
+												<FontIcon iconLiteral="far-question-circle" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Consultas sobre los libros que estan prestados actualmente" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="historicoPrestamosBtn" mnemonicParsing="false" onAction="#historicoPrestamosBtn" text="%boton7">
+											<graphic>
+												<FontIcon iconLiteral="far-folder-open" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Consultas en el historico de la biblioteca" />
+                                 </tooltip>
+										</Button>
+									</children>
+								</VBox>
+								<ListView fx:id="lstPrestables" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+									<GridPane.margin>
+										<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+									</GridPane.margin>
+								</ListView>
+								<Label alignment="CENTER" prefHeight="16.0" prefWidth="528.0" text="%label9">
+									<font>
+										<Font size="16.0" />
+									</font>
+								</Label>
+								<Label alignment="CENTER" prefHeight="20.0" prefWidth="283.0" text="%label10" GridPane.columnIndex="2">
+									<font>
+										<Font size="16.0" />
+									</font>
+								</Label>
+							</children>
+						</GridPane>
+					</content>
+				</Tab>
+				<Tab text="%label4">
+					<content>
+						<GridPane fx:id="grid" alignment="CENTER" prefHeight="463.0" prefWidth="882.0">
+							<columnConstraints>
+								<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+								<ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="200.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+							</rowConstraints>
+							<children>
+								<TableView fx:id="tablaAlumnos" onMouseClicked="#clickTablaAlumno" prefHeight="200.0" prefWidth="200.0">
+									<columns>
+										<TableColumn fx:id="nombreAlumnoCol" prefWidth="144.0" text="%tabla31" />
+										<TableColumn fx:id="apellido1Col" prefWidth="154.0" text="%tabla32" />
+										<TableColumn fx:id="apellido2Col" prefWidth="185.0" text="%tabla33" />
+									</columns>
+									<GridPane.margin>
+										<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+									</GridPane.margin>
+								</TableView>
+								<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="45.0" GridPane.columnIndex="1">
+									<children>
+										<Button fx:id="nuevoAlumnoBtn" mnemonicParsing="false" onAction="#nuevoAlumnoBtn" text="%boton1">
+											<graphic>
+												<FontIcon iconLiteral="far-plus-square" iconSize="20" selectionEnd="1" selectionFill="#070707" wrappingWidth="20.0" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Dar de alta un alumno en la biblioteca" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="editarAlumnoBtn" mnemonicParsing="false" onAction="#editarAlumnoBtn" text="%boton3">
+											<graphic>
+												<FontIcon iconLiteral="far-edit" iconSize="20" selectionEnd="1" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Editar un alumno existente" />
+                                 </tooltip>
+										</Button>
+										<Button fx:id="consultarAlumnosBtn" mnemonicParsing="false" onAction="#consultarAlumnosBtn" text="%boton4">
+											<graphic>
+												<FontIcon iconLiteral="far-question-circle" iconSize="20" text="" />
+											</graphic>
+                                 <tooltip>
+                                    <Tooltip text="Consultar un alumno " />
+                                 </tooltip>
+										</Button>
+									</children>
+								</VBox>
+							</children>
+						</GridPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+		<MenuBar GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+			<menus>
+				<Menu mnemonicParsing="false" text="%label5">
+					<items>
+						<MenuItem fx:id="menuInforme1" mnemonicParsing="false" onAction="#lanzarInforme1" text="%label6" />
+						<MenuItem fx:id="menuinforme2" mnemonicParsing="false" onAction="#lanzarInforme2" text="%label7" />
+						<MenuItem fx:id="menuInforme3" mnemonicParsing="false" onAction="#lanzarInforme3" text="%label8" />
+					</items>
+				</Menu>
+				<Menu fx:id="menuAyuda" mnemonicParsing="false" text="%label17">
+					<items>
+						<MenuItem fx:id="ayudaMenu" mnemonicParsing="false" onAction="#lanzarAyuda" text="%label17" />
+                  <MenuItem mnemonicParsing="false" onAction="#lanzarGuiaRapida" text="%label18" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+		<HBox alignment="CENTER" prefHeight="112.0" prefWidth="900.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+			<children>
+				<ImageView fitHeight="169.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+					<image>
+						<Image url="@../images/logoBiblioBlanco.png" />
+					</image>
+				</ImageView>
+				<Label prefHeight="31.0" prefWidth="384.0" text="%label1">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+			</children>
+		</HBox>
+	</children>
+</GridPane>

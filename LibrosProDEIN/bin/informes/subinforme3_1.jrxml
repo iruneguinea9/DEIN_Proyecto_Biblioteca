@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subinforme3_1" pageWidth="350" pageHeight="350" columnWidth="310" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="030c40a8-64f0-462e-aaf1-8c470ba6a039">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="paises"/>
+	<queryString language="SQL">
+		<![CDATA[select libros.Libro.titulo, count(libros.Historico_prestamo.codigo_libro) from libros.Historico_prestamo,libros.Libro where libros.Libro.codigo = libros.Historico_prestamo.codigo_libro group by libros.Historico_prestamo.codigo_libro]]>
+	</queryString>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="count(libros.Historico_prestamo.codigo_libro)" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="count(libros.Historico_prestamo.codigo_libro)"/>
+		<property name="com.jaspersoft.studio.field.label" value="count(libros.Historico_prestamo.codigo_libro)"/>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="1" width="240" height="60" uuid="bf8dd11a-635d-473e-9776-b10111f21048"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier New" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cúantas veces se ha prestado cada libro?]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="231">
+			<barChart>
+				<chart isShowLegend="true" evaluationTime="Report" renderType="image">
+					<reportElement stretchType="ElementGroupHeight" x="1" y="12" width="259" height="188" uuid="871655c5-f129-4d1a-9a90-df4d2adf5c52">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend textColor="#030303" backgroundColor="#FFFFFF"/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{titulo}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{titulo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{count(libros.Historico_prestamo.codigo_libro)}]]></valueExpression>
+						<labelExpression><![CDATA[$F{titulo}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</columnHeader>
+</jasperReport>

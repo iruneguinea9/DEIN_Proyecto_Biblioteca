@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subinforme3_2" pageWidth="350" pageHeight="300" columnWidth="310" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53855a52-23f9-47ab-846a-3a4b333ce308">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="paises"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select libros.Alumno.nombre,libros.Alumno.apellido1,libros.Alumno.apellido2, count(libros.Historico_prestamo.dni_alumno) from libros.Historico_prestamo,libros.Alumno where libros.Alumno.dni = libros.Historico_prestamo.dni_alumno group by libros.Historico_prestamo.dni_alumno]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="count(libros.Historico_prestamo.dni_alumno)" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="count(libros.Historico_prestamo.dni_alumno)"/>
+		<property name="com.jaspersoft.studio.field.label" value="count(libros.Historico_prestamo.dni_alumno)"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="-17" y="2" width="280" height="62" uuid="05c00a57-f28c-4938-b485-2b2c3a8d6b9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier New" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Cúantos libros ha cogido prestado cada alumno?]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="181" splitType="Stretch">
+			<bar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="3" y="-8" width="240" height="160" uuid="27b27d34-29c9-48db-9146-9582e2edc5f0">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{nombre}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombre}+" "+$F{apellido1} +" "+$F{apellido2}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{count(libros.Historico_prestamo.dni_alumno)}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</columnHeader>
+</jasperReport>

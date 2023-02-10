@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subinforme3_3" pageWidth="350" pageHeight="300" columnWidth="310" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7cc2bf6-6452-4b05-9c66-34cbb9874278">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="paises"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT libros.Libro.editorial,count(libros.Libro.editorial) FROM libros.Libro group by libros.Libro.editorial;]]>
+	</queryString>
+	<field name="editorial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="editorial"/>
+		<property name="com.jaspersoft.studio.field.label" value="editorial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="count(libros.Libro.editorial)" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="count(libros.Libro.editorial)"/>
+		<property name="com.jaspersoft.studio.field.label" value="count(libros.Libro.editorial)"/>
+	</field>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="240" height="65" uuid="cad35a0d-e22b-434f-949c-f274dad5f4c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Courier New" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dominio de las editoriales]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="181" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="1" y="10" width="240" height="160" uuid="a5951c37-3079-4dbf-ba4f-66db495b5795"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$F{editorial}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count(libros.Libro.editorial)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{editorial}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</columnHeader>
+</jasperReport>

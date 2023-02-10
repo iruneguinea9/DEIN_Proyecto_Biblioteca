@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informe1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f6e4db4-9f8f-4ffe-9759-6e1fd142f492">
+	<property name="template.type" value="columnar"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="paises"/>
+	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[select * from libros.Prestamo, libros.Alumno,libros.Libro where libros.Alumno.dni = libros.Prestamo.dni_alumno and libros.Libro.codigo=libros.Prestamo.codigo_libro ORDER BY libros.Prestamo.id_prestamo DESC LIMIT 1]]>
+	</queryString>
+	<field name="id_prestamo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Prestamo"/>
+	</field>
+	<field name="dni_alumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Prestamo"/>
+	</field>
+	<field name="codigo_libro" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo_libro"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo_libro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Prestamo"/>
+	</field>
+	<field name="fecha_prestamo" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Prestamo"/>
+	</field>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="codigo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="autor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="autor"/>
+		<property name="com.jaspersoft.studio.field.label" value="autor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="editorial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="editorial"/>
+		<property name="com.jaspersoft.studio.field.label" value="editorial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="baja" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="baja"/>
+		<property name="com.jaspersoft.studio.field.label" value="baja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="portada" class="java.awt.Image">
+		<property name="com.jaspersoft.studio.field.name" value="portada"/>
+		<property name="com.jaspersoft.studio.field.label" value="portada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{id_prestamo}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#E67AD5" uuid="d8de62c1-c7b7-4da8-8c69-000abeaa2cc0"/>
+					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="80" y="1" width="371" height="23" forecolor="#FFFFFF" uuid="25f707ae-9ac7-48d3-b45f-b14ee85fae9a"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{id_prestamo}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="2" y="0" width="78" height="24" forecolor="#FFFFFF" uuid="3103972a-b711-4f24-97b2-a262f2b4b55a"/>
+						<box>
+							<pen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+						</box>
+						<textElement>
+							<font fontName="Times New Roman" size="18" isBold="false"/>
+						</textElement>
+						<text><![CDATA[Préstamo:]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{dni_alumno}]]></groupExpression>
+		<groupHeader>
+			<band height="408">
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="345" y="50" width="211" height="111" forecolor="#000000" uuid="4f894c7b-ac0a-463e-9e33-7d2560baa292"/>
+					<textElement>
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DNI: "+
+$F{dni_alumno}+"\nNombre y apellidos: "
++$F{nombre}+ " "+$F{apellido1}+ " "+$F{apellido2}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="0" y="50" width="100" height="100" uuid="a0221c49-fb14-4d48-97e4-11333b968c72"/>
+					<box>
+						<pen lineWidth="5.0" lineColor="#B66AFC"/>
+					</box>
+					<imageExpression><![CDATA[$F{portada}]]></imageExpression>
+				</image>
+				<rectangle>
+					<reportElement x="120" y="20" width="211" height="20" backcolor="#CFA4DE" uuid="86e59fa1-0a36-4b9a-b64a-5b5bd2adcb47"/>
+				</rectangle>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="120" y="50" width="211" height="111" forecolor="#000000" uuid="cbe3bf82-8d3e-4143-86c4-b8a8acaae201"/>
+					<textElement>
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Código: "+$F{codigo_libro}+"\nTítulo: "+$F{titulo}+"\nAutor: "+$F{autor}+"\nEditorial: "+$F{editorial}+"\nEstado del libro: "+$F{estado}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="340" y="20" width="211" height="20" backcolor="#CFA4DE" uuid="31117026-f191-43bf-b093-60691a760d76"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="119" y="20" width="211" height="20" forecolor="#FFFFFF" uuid="34559ad1-f716-4748-8517-6397f9c4bf41"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Datos del libro]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="120" y="175" width="431" height="20" backcolor="#CFA4DE" uuid="008190ac-d180-41ff-ba41-5076ede01cd2"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="120" y="176" width="436" height="20" forecolor="#FFFFFF" uuid="979d598e-f063-4909-a013-229821a29c83"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Datos del prestamo]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="120" y="203" width="436" height="108" forecolor="#000000" uuid="ff2b0caa-8901-4add-a664-f95a7a16de10"/>
+					<textElement>
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Fecha de prestamo: "+$F{fecha_prestamo}+"\nFecha máxima de devolución: "+(
+new java.sql.Date($F{fecha_prestamo}.getTime())
+                           .toLocalDate()
+                           .plusDays(15)
+                           .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")))]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="340" y="20" width="211" height="20" forecolor="#FFFFFF" uuid="dc547f02-6235-423b-8675-77caab4112b3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Datos del alumno]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="codigo_libro">
+		<groupExpression><![CDATA[$F{codigo_libro}]]></groupExpression>
+	</group>
+	<group name="fecha_prestamo">
+		<groupExpression><![CDATA[$F{fecha_prestamo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="129" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="160" height="129" uuid="d47168ce-aae1-4efc-8d24-e15195025a5a"/>
+				<imageExpression><![CDATA["resources/images/logobiblio.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="125" y="32" width="280" height="70" uuid="f49d68fd-a2c7-44ec-a5fc-9300d10c85a1"/>
+				<textElement>
+					<font size="30" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Biblioteca de Irune]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="212" y="64" width="217" height="29" uuid="eef58983-008d-4a5b-8e47-97f8d4670c7a"/>
+				<textElement>
+					<font size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Recibo de préstamo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<columnFooter>
+		<band height="102" splitType="Stretch">
+			<image>
+				<reportElement x="372" y="-62" width="172" height="164" uuid="9e2c0585-e301-4565-85fb-917606cb7a6e"/>
+				<imageExpression><![CDATA["resources/images/prestamo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="4" y="11" width="152" height="80" uuid="df12153b-6945-4be9-aebc-6681daf3abb6"/>
+				<textElement>
+					<font fontName="FreeMono" size="10"/>
+				</textElement>
+				<text><![CDATA[Biblioteca Irune               Calle Erkuden 27               Altsasu, Navarra 31800   948467665 / 687899876 bibliotecaIrune@irune.eus www.bibliotecaIrune.eus]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="555" height="13" forecolor="#D0B48E" backcolor="#E67AD5" uuid="bfdca178-800d-445c-9a31-bb616a00e8ce"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="14d8de1e-8695-4078-a67f-0e69172574d5"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subinformePrestamosLibros" pageWidth="595" pageHeight="700" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="706d86e2-3672-4ab7-a0c9-9c60fce0b039">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="paises"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="CODIGO_LIBRO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select * from libros.Historico_prestamo,libros.Alumno where libros.Historico_prestamo.dni_alumno = libros.Alumno.dni]]>
+	</queryString>
+	<field name="id_prestamo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="dni_alumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="codigo_libro" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo_libro"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo_libro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="fecha_prestamo" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="fecha_devolucion" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_devolucion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_devolucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{id_prestamo}]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{dni_alumno}]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupExpression><![CDATA[$F{codigo_libro}]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupExpression><![CDATA[$F{fecha_prestamo}]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<detail>
+		<band height="80">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="80" uuid="7eb75830-2a86-4e1e-a11c-54ad3ec2d858"/>
+				<textFieldExpression><![CDATA["Prestamo: "+$F{id_prestamo}+
+"\nAlumno "+$F{nombre}+" "+$F{apellido1}+" "+$F{apellido2}+
+"\nPrestado en la fecha: "+$F{fecha_prestamo}+
+"\nDevuelto en la fecha: "+$F{fecha_devolucion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="50" width="555" height="1" uuid="c1b200cc-6435-4449-aba4-7ab805d425df"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17"/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

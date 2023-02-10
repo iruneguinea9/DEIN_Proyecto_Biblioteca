@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informe3" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c72f96d9-38c2-435f-af49-97a4a2b29c57">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="paises"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="39581794-7f4c-48d6-8f6a-b421776f515c"/>
+	<queryString>
+		<![CDATA[select* from libros.Libro,libros.Historico_prestamo,libros.Alumno where libros.Libro.codigo = libros.Historico_prestamo.codigo_libro and libros.Alumno.dni=libros.Historico_prestamo.dni_alumno]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="autor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="autor"/>
+		<property name="com.jaspersoft.studio.field.label" value="autor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="editorial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="editorial"/>
+		<property name="com.jaspersoft.studio.field.label" value="editorial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="baja" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="baja"/>
+		<property name="com.jaspersoft.studio.field.label" value="baja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="portada" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="portada"/>
+		<property name="com.jaspersoft.studio.field.label" value="portada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+	</field>
+	<field name="id_prestamo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="dni_alumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="codigo_libro" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo_libro"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo_libro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="fecha_prestamo" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_prestamo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="fecha_devolucion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_devolucion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_devolucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Historico_prestamo"/>
+	</field>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<title>
+		<band height="145" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="65" width="595" height="66" forecolor="#FF66FF" backcolor="#FF66FF" uuid="ae485675-90d7-4ed2-9147-6534caed5f48"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-20" y="-20" width="595" height="85" backcolor="#FA93D6" uuid="55dd9506-05f6-43a0-aef0-5155c3dde244"/>
+				<graphicElement>
+					<pen lineColor="#FF66CC"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="Title" x="-23" y="-1" width="577" height="65" uuid="cf1fabd8-9376-4a95-a65d-c762a7404011"/>
+				<textElement textAlignment="Right">
+					<font size="54" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Informes gráficos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="73" width="314" height="50" forecolor="#FFFFFF" uuid="ff23ae0a-25e4-4778-a557-bb999131acf2">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="24"/>
+					<paragraph rightIndent="20"/>
+				</textElement>
+				<text><![CDATA[Biblioteca de Irune]]></text>
+			</staticText>
+			<image>
+				<reportElement x="300" y="73" width="49" height="55" uuid="cced6e84-61d1-464c-a89b-9ae04b4b8045"/>
+				<imageExpression><![CDATA["resources/images/logoBiblioBlanco.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="9" width="555" height="13" forecolor="#D0B48E" backcolor="#FF73C9" uuid="3699b002-29f8-4540-9d79-f2481ac32055"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="13" forecolor="#FFFFFF" uuid="016c729e-b855-45af-886b-2d36445d0028"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" mode="Transparent" x="433" y="0" width="80" height="13" forecolor="#FFFFFF" uuid="7454c3b6-3988-469e-a900-8332ac496ed2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="7eeca173-e872-4714-98dc-e3c32f783582"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="570" splitType="Stretch">
+			<subreport>
+				<reportElement x="-12" y="2" width="200" height="200" uuid="2360529b-cc80-437c-afd5-5c04059841f0"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["resources/informes/subinforme3_1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="269" y="1" width="200" height="200" uuid="04748a3d-b4f2-4f1b-aab2-6bfbcd18ea07"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["resources/informes/subinforme3_2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="293" width="200" height="200" uuid="ba4c1b7d-814f-4fa5-aab0-0528b24a1ac9"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["resources/informes/subinforme3_3.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="399" y="474" width="152" height="80" uuid="d6f053f2-a194-4ab2-9c1c-e860cdd60115"/>
+				<textElement>
+					<font fontName="FreeMono" size="10"/>
+				</textElement>
+				<text><![CDATA[Biblioteca Irune               Calle Erkuden 27               Altsasu, Navarra 31800   948467665 / 687899876 bibliotecaIrune@irune.eus www.bibliotecaIrune.eus]]></text>
+			</staticText>
+			<image>
+				<reportElement x="319" y="475" width="80" height="70" uuid="2e64601f-8397-4f8d-a871-a1c5989e8a54"/>
+				<imageExpression><![CDATA["resources/images/logoBiblioBlanco.png"]]></imageExpression>
+			</image>
+		</band>
+	</summary>
+</jasperReport>

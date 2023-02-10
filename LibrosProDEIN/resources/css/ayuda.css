@@ -1,0 +1,97 @@
+* {
+	font-family: calibri;
+	
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+div#d1{
+	background-color: #A66DBD;
+	color: white;
+	padding: 30px;
+}
+
+h2 {
+	color: white;
+}
+
+li {
+	display: inline-block;
+}
+
+div#d2 {
+	/* the divisions made for the video and the sound */
+	margin: 0 auto;
+	text-align: justify;
+}
+#general {
+	margin: 0 auto;
+	background-color: #D48CF0;
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
+
+div#navigation {
+	border: 2px solid black;
+	text-align: center;
+	margin: 0 auto 20px;
+	background: black;
+	color: white;
+	padding: 5px;
+}
+
+
+ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+a {
+	text-decoration: none;
+	color: #474646;
+	padding: 10px;
+	display: block;
+}
+
+#this {
+	/* to mark in which page you are */
+	background-color: white;
+	color: black;
+}
+
+a:hover {
+	/* the hover efect */
+	background-color: black;
+	color: white;
+}
+
+label.title {
+	color: white;
+	font-weight: bold;
+}
+label {
+	margin-right: 13px;
+	color: white;
+}
+
+p{
+	text-align: justify;
+	margin: 20px;
+}
+
+/* to make the pictures be side by side */
+.column {
+  float: left;
+  width: 30.33%;
+  padding: 5px;
+  margin-left: 25px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
