@@ -91,9 +91,9 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="147">
+		<band height="276">
 			<subreport>
-				<reportElement x="-20" y="0" width="595" height="140" uuid="ea593537-a1f5-490e-a407-a31146867781"/>
+				<reportElement x="0" y="0" width="555" height="250" uuid="11c71058-b891-44ec-a2d0-f8ebb852239f"/>
 				<subreportParameter name="CODIGO_LIBRO">
 					<subreportParameterExpression><![CDATA[$F{codigo}]]></subreportParameterExpression>
 				</subreportParameter>

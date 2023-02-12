@@ -16,7 +16,7 @@
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select * from libros.Historico_prestamo,libros.Alumno where libros.Historico_prestamo.dni_alumno = libros.Alumno.dni]]>
+		<![CDATA[select * from libros.Historico_prestamo,libros.Alumno where libros.Historico_prestamo.dni_alumno = libros.Alumno.dni  and libros.Historico_prestamo.codigo_libro = $P{CODIGO_LIBRO}]]>
 	</queryString>
 	<field name="id_prestamo" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id_prestamo"/>
@@ -93,7 +93,7 @@
 	<detail>
 		<band height="80">
 			<textField>
-				<reportElement x="0" y="0" width="555" height="80" uuid="7eb75830-2a86-4e1e-a11c-54ad3ec2d858"/>
+				<reportElement x="0" y="0" width="555" height="60" uuid="7eb75830-2a86-4e1e-a11c-54ad3ec2d858"/>
 				<textFieldExpression><![CDATA["Prestamo: "+$F{id_prestamo}+
 "\nAlumno "+$F{nombre}+" "+$F{apellido1}+" "+$F{apellido2}+
 "\nPrestado en la fecha: "+$F{fecha_prestamo}+

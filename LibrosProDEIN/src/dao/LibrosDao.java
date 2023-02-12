@@ -164,6 +164,24 @@ public class LibrosDao {
 		return true;
 	}
     /*--------------------------------------------------------------------------------------------------------------- 
+    Método: Libro titulo
+    Uso: Devuelve el libro que coincida con el titulo que se le pasa
+    --------------------------------------------------------------------------------------------------------------- */
+	public static Libro libroTitulo(String titulo) throws SQLException {
+		
+		con = new ConexionDB();
+		Connection conn = con.getConexion();
+		Libro lib = null;
+		String sql = "SELECT * FROM libros.Libro where libros.Libro.titulo = ?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, titulo);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			lib = new Libro(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getBlob(7));
+		}
+		return lib;
+	}
+    /*--------------------------------------------------------------------------------------------------------------- 
     Método: cual libro
     Uso: Devuelve el libro que coincide con el codigo que se le pasa
     --------------------------------------------------------------------------------------------------------------- */

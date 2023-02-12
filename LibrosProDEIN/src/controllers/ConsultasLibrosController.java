@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dao.LibrosDao;
+import dao.PrestamoDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,7 +72,7 @@ public class ConsultasLibrosController implements Initializable {
 					listaBase = listaNombre;
 				}
 				for (int i = 0; i < listaBase.size(); i++) {
-					if (listaBase.get(i).getCodigo() == Integer.parseInt(codigoTxt.getText().toString())) { 
+					if (listaBase.get(i).getCodigo() == Integer.parseInt(codigoTxt.getText().toString())) {
 						lista2.add(listaBase.get(i));
 					}
 				}
@@ -89,7 +90,7 @@ public class ConsultasLibrosController implements Initializable {
 
 			}
 		} catch (NumberFormatException e1) {
-			Utilidades.mostrarAlertInfo(stage,  bundle.getString("err6"));
+			Utilidades.mostrarAlertInfo(stage, bundle.getString("err6"));
 			codigoTxt.setText("");
 		}
 	}
@@ -109,7 +110,7 @@ public class ConsultasLibrosController implements Initializable {
 				listaBase = listaCodigo;
 			}
 			for (int i = 0; i < listaBase.size(); i++) {
-				if (listaBase.get(i).getTitulo().toString().toLowerCase().contains(nombreTxt.getText().toLowerCase())) { 
+				if (listaBase.get(i).getTitulo().toString().toLowerCase().contains(nombreTxt.getText().toLowerCase())) {
 					lista2.add(listaBase.get(i));
 				}
 			}
@@ -145,54 +146,60 @@ public class ConsultasLibrosController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			
+
 			String idioma = Propiedades.getValor("idioma");
 			String region = Propiedades.getValor("region");
 			Locale.setDefault(new Locale(idioma, region));
 			bundle = ResourceBundle.getBundle("idiomas/messages");
-			
+
 			lista = FXCollections.observableArrayList();
 
 			lista = LibrosDao.cargarTabla();
 
 			listaLIbros.setItems(lista);
 
-			MenuItem bajaItem = new MenuItem( bundle.getString("titulo10"));
+			MenuItem bajaItem = new MenuItem(bundle.getString("titulo10"));
 			ctxMenu = new ContextMenu();
 			ctxMenu.getItems().addAll(bajaItem);
 			listaLIbros.setContextMenu(ctxMenu);
 			bajaItem.setOnAction(e -> darDeBaja(e));
 
 		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage,  bundle.getString("err2"));
+			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Dar de baja
 	Uso: Cambiar el campo baja del libro a 0
 	--------------------------------------------------------------------------------------------------------------- */
 	private void darDeBaja(ActionEvent e) {
-		if (listaLIbros.getSelectionModel().getSelectedItem() != null) {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle(bundle.getString("check15"));
-			alert.setHeaderText(bundle.getString("check16"));
-			alert.setContentText(bundle.getString("check17"));
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-			try {
-				
-				Boolean b = LibrosDao.darDeBaja(listaLIbros.getSelectionModel().getSelectedItem());
-				if (b) {
-					Utilidades.mostrarAlertInfo(stage,  bundle.getString("info1"));
-					lista = LibrosDao.cargarTabla();
-					listaLIbros.setItems(lista);
-					listaLIbros.refresh();
+		try {
+			if (listaLIbros.getSelectionModel().getSelectedItem() != null) {
+				if (PrestamoDao.estaPrestado(listaLIbros.getSelectionModel().getSelectedItem()))
+					Utilidades.mostrarAlertInfo(stage, bundle.getString("warning3"));
+				else {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle(bundle.getString("check15"));
+					alert.setHeaderText(bundle.getString("check16"));
+					alert.setContentText(bundle.getString("check17"));
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == ButtonType.OK) {
+
+						Boolean b = LibrosDao.darDeBaja(listaLIbros.getSelectionModel().getSelectedItem());
+						if (b) {
+							Utilidades.mostrarAlertInfo(stage, bundle.getString("info1"));
+							lista = LibrosDao.cargarTabla();
+							listaLIbros.setItems(lista);
+							listaLIbros.refresh();
+						}
+
+					}
 				}
-			} catch (SQLException e1) {
-				Utilidades.mostrarAlertInfo(stage,  bundle.getString("err2"));
 			}
-			}
+		} catch (SQLException e1) {
+			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 	}
 }

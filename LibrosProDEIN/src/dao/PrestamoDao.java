@@ -88,7 +88,7 @@ public class PrestamoDao {
 		Prestamo pres = null;
 		String sql = "SELECT * FROM libros.Prestamo where libros.Prestamo.codigo_libro = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setInt(1,libroTitulo( prestamoDatos.getTitulo()).getCodigo());
+		ps.setInt(1,LibrosDao.libroTitulo( prestamoDatos.getTitulo()).getCodigo());
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			pres = new Prestamo(rs.getString(2), rs.getInt(3), rs.getDate(4));
@@ -96,22 +96,22 @@ public class PrestamoDao {
 				
 		return pres;
 	}
-    /*--------------------------------------------------------------------------------------------------------------- 
-    Método: Libro titulo
-    Uso: Devuelve el libro que coincida con el titulo que se le pasa
+
+	  /*--------------------------------------------------------------------------------------------------------------- 
+    Método: Esta prestado?
+    Uso: Devuelve si el libro esta actualmente prestado
     --------------------------------------------------------------------------------------------------------------- */
-	public static Libro libroTitulo(String titulo) throws SQLException {
+	public static Boolean estaPrestado(Libro lib) throws SQLException {
 		
 		con = new ConexionDB();
 		Connection conn = con.getConexion();
-		Libro lib = null;
-		String sql = "SELECT * FROM libros.Libro where libros.Libro.titulo = ?";
+		String sql = "SELECT * FROM libros.Prestamo where libros.Prestamo.codigo_libro = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, titulo);
+		ps.setInt(1, lib.getCodigo());
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			lib = new Libro(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getBlob(7));
+			return true;
 		}
-		return lib;
+		return false;
 	}
 }

@@ -156,6 +156,7 @@ public class VentanaPrincipalController implements Initializable {
 
 	private ObservableList<PrestamoDatos> listaPrestamosTabla;
 	private Stage stage;
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Dar de baja
 	Uso: Cambiar el campo baja del libro a 0
@@ -163,29 +164,31 @@ public class VentanaPrincipalController implements Initializable {
 	@FXML
 	void bajaLibroBtn(ActionEvent event) {
 		try {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle(bundle.getString("check15"));
-			alert.setHeaderText(bundle.getString("check16"));
-			alert.setContentText(bundle.getString("check17"));
+			if (PrestamoDao.estaPrestado(tablaLibros.getSelectionModel().getSelectedItem()))
+				Utilidades.mostrarAlertInfo(stage, bundle.getString("warning3"));
+			else {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle(bundle.getString("check15"));
+				alert.setHeaderText(bundle.getString("check16"));
+				alert.setContentText(bundle.getString("check17"));
 
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK) {
-				Boolean b = LibrosDao.darDeBaja(tablaLibros.getSelectionModel().getSelectedItem());
-				if (!b) {
-					Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
-				} else {
-					listaLibrosTabla = LibrosDao.cargarTabla();
-					tablaLibros.setItems(listaLibrosTabla);
-					tablaLibros.refresh();
-					Utilidades.mostrarAlertInfo(stage, bundle.getString("info1"));
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK) {
+					Boolean b = LibrosDao.darDeBaja(tablaLibros.getSelectionModel().getSelectedItem());
+					if (!b) {
+						Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
+					} else {
+						refrescar();
+						Utilidades.mostrarAlertInfo(stage, bundle.getString("info1"));
+					}
 				}
 			}
-
 		} catch (SQLException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Consultar alumnos
 	Uso: Lanza la ventana para hacer consultas sobre alumnos
@@ -208,6 +211,7 @@ public class VentanaPrincipalController implements Initializable {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Consultar libro 
 	Uso: Lanza la ventana para hacer consultas sobre libros
@@ -226,15 +230,12 @@ public class VentanaPrincipalController implements Initializable {
 			newStage.setScene(newScene);
 			newStage.setTitle(bundle.getString("titulo11"));
 			newStage.showAndWait();
-			listaLibrosTabla = LibrosDao.cargarTabla();
-			tablaLibros.setItems(listaLibrosTabla);
-			tablaLibros.refresh();
+			refrescar();
 		} catch (IOException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Constular Prestamos
 	Uso: Lanza la ventana para hacer consultas sobre prestamos
@@ -257,6 +258,7 @@ public class VentanaPrincipalController implements Initializable {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Devolver libro
 	Uso: Devuelve el libro y pregunta al usuario sobre el estado
@@ -283,12 +285,8 @@ public class VentanaPrincipalController implements Initializable {
 						newStage.setTitle(bundle.getString("titulo3"));
 						controlador.pasoPrestamo(pres);
 						newStage.showAndWait();
-						listaPrestamosTabla = PrestamoDao.cargarTabla();
-						listaLibrosPrestables = LibrosDao.librosPrestables();
-						lstPrestables.setItems(listaLibrosPrestables);
-						tablaPrestamos.setItems(listaPrestamosTabla);
-						tablaPrestamos.refresh();
-						lstPrestables.refresh();
+						refrescar();
+
 					} catch (IOException e) {
 
 						Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
@@ -303,6 +301,7 @@ public class VentanaPrincipalController implements Initializable {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("warning1"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Editar alumno
 	Uso: Lanza ventana para editar un alumno seleccionado de la tabla
@@ -322,15 +321,12 @@ public class VentanaPrincipalController implements Initializable {
 			newStage.setTitle(bundle.getString("titulo4"));
 			controlador.rellenar(tablaAlumnos.getSelectionModel().getSelectedItem());
 			newStage.showAndWait();
-			listaAlumnosTabla = AlumnoDao.listaAlumnos();
-			tablaAlumnos.setItems(listaAlumnosTabla);
-			tablaAlumnos.refresh();
+			refrescar();
 		} catch (IOException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Editar libro
 	Uso: Lanza ventana para editar un libro seleccionado de la tabla
@@ -350,15 +346,12 @@ public class VentanaPrincipalController implements Initializable {
 			newStage.setTitle(bundle.getString("titulo5"));
 			controlador.rellenar(tablaLibros.getSelectionModel().getSelectedItem());
 			newStage.showAndWait();
-			listaLibrosTabla = LibrosDao.cargarTabla();
-			tablaLibros.setItems(listaLibrosTabla);
-			tablaLibros.refresh();
+			refrescar();
 		} catch (IOException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Historico prestamo
 	Uso: Lanza ventana para consultar sobre el historico
@@ -382,6 +375,7 @@ public class VentanaPrincipalController implements Initializable {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Nuevo alumno
 	Uso: Lanza ventana para insertar un alumno nuevo
@@ -399,16 +393,13 @@ public class VentanaPrincipalController implements Initializable {
 			newStage.setScene(newScene);
 			newStage.setTitle(bundle.getString("titulo7"));
 			newStage.showAndWait();
-			listaAlumnosTabla = AlumnoDao.listaAlumnos();
-			tablaAlumnos.setItems(listaAlumnosTabla);
-			tablaAlumnos.refresh();
+			refrescar();
 		} catch (IOException e) {
 
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Nuevo libro
 	Uso: Lanza ventana para insertar un libro nuevo
@@ -427,16 +418,13 @@ public class VentanaPrincipalController implements Initializable {
 			newStage.setScene(newScene);
 			newStage.setTitle(bundle.getString("titulo8"));
 			newStage.showAndWait();
-			listaLibrosTabla = LibrosDao.cargarTabla();
-			tablaLibros.setItems(listaLibrosTabla);
-			tablaLibros.refresh();
+			refrescar();
 		} catch (IOException e) {
 
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Click tabla alumno
 	Uso: Para al seleccionar un alumno habilitar la opcion de editarlo
@@ -447,6 +435,7 @@ public class VentanaPrincipalController implements Initializable {
 			editarAlumnoBtn.setDisable(false);
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Prestar 
 	Uso: Lanza ventana para prestar un libro 
@@ -467,19 +456,12 @@ public class VentanaPrincipalController implements Initializable {
 			if (lstPrestables.getSelectionModel().getSelectedItem() != null)
 				controlador.pasarCosas(lstPrestables.getSelectionModel().getSelectedItem());
 			newStage.showAndWait();
-			listaPrestamosTabla = PrestamoDao.cargarTabla();
-			listaLibrosPrestables = LibrosDao.librosPrestables();
-			lstPrestables.setItems(listaLibrosPrestables);
-			tablaPrestamos.setItems(listaPrestamosTabla);
-			tablaPrestamos.refresh();
-			lstPrestables.refresh();
+			refrescar();
 		} catch (IOException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err1"));
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err3"));
-
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Click tabla libros
 	Uso: Para al seleccionar un libro habilitar las opciones de editarlo y darlo de baja
@@ -491,13 +473,14 @@ public class VentanaPrincipalController implements Initializable {
 			bajaLibroBtn.setDisable(false);
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Lanzar guia rápida
 	Uso: Para lanzar la guia rápida en HTML
 	--------------------------------------------------------------------------------------------------------------- */
-    @FXML
-    void lanzarGuiaRapida(ActionEvent event) {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VisorAyuda.fxml"));
+	@FXML
+	void lanzarGuiaRapida(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VisorAyuda.fxml"));
 		Parent root;
 		try {
 			root = loader.load();
@@ -509,8 +492,9 @@ public class VentanaPrincipalController implements Initializable {
 		} catch (IOException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("errPDF"));
 		}
-    }
-    /*--------------------------------------------------------------------------------------------------------------- 
+	}
+
+	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Lanzar ayuda
 	Uso: Para lanzar la ayuda en PDF
 	--------------------------------------------------------------------------------------------------------------- */
@@ -530,9 +514,9 @@ public class VentanaPrincipalController implements Initializable {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("errPDF"));
 
 		}
-		
 
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Click tabla prestamo
 	Uso: Para al seleccionar un prestamo habilitar la opcion de devolverlo
@@ -543,6 +527,34 @@ public class VentanaPrincipalController implements Initializable {
 			devolverBtn.setDisable(false);
 		}
 	}
+
+	/*--------------------------------------------------------------------------------------------------------------- 
+	Método: Refrescar tablas
+	Uso: Para que las tablas esten actalizadas
+	--------------------------------------------------------------------------------------------------------------- */
+	private void refrescar() {
+
+		try {
+			listaLibrosTabla = LibrosDao.cargarTabla();
+			listaPrestamosTabla = PrestamoDao.cargarTabla();
+			listaLibrosPrestables = LibrosDao.librosPrestables();
+			listaAlumnosTabla = AlumnoDao.listaAlumnos();
+			tablaAlumnos.setItems(listaAlumnosTabla);
+			lstPrestables.setItems(listaLibrosPrestables);
+			tablaPrestamos.setItems(listaPrestamosTabla);
+			tablaLibros.setItems(listaLibrosTabla);
+
+			tablaAlumnos.refresh();
+			tablaLibros.refresh();
+			tablaPrestamos.refresh();
+			lstPrestables.refresh();
+		} catch (SQLException e) {
+			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
+
+		}
+
+	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Lanzar informe 1
 	Uso: Para lanzar informe de los prestamos
@@ -556,10 +568,12 @@ public class VentanaPrincipalController implements Initializable {
 		} catch (SQLException e) {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
 		} catch (JRException e) {
+			e.printStackTrace();
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("errPDF"));
 
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Lanzar informe 2
 	Uso: Para lanzar informe de los graficos
@@ -577,6 +591,7 @@ public class VentanaPrincipalController implements Initializable {
 
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Lanzar informe 3
 	Uso: Para lanzar informe de los calculos
@@ -594,6 +609,7 @@ public class VentanaPrincipalController implements Initializable {
 			Utilidades.mostrarAlertInfo(stage, bundle.getString("errPDF"));
 		}
 	}
+
 	/*--------------------------------------------------------------------------------------------------------------- 
 	Método: Initialize
 	Uso: Iniciar el bundle, llenar las tablas, iniciarlas
@@ -614,54 +630,42 @@ public class VentanaPrincipalController implements Initializable {
 		listaLibrosPrestables = FXCollections.observableArrayList();
 		// para cargar los alumnos
 		listaAlumnosTabla = FXCollections.observableArrayList();
-		try {
-			listaLibrosTabla = LibrosDao.cargarTabla();
-			listaPrestamosTabla = PrestamoDao.cargarTabla();
-			listaLibrosPrestables = LibrosDao.librosPrestables();
-			listaAlumnosTabla = AlumnoDao.listaAlumnos();
+		refrescar();
 
-			editarLibroBtn.setDisable(true);
-			bajaLibroBtn.setDisable(true);
-			editarAlumnoBtn.setDisable(true);
-			devolverBtn.setDisable(true);
+		editarLibroBtn.setDisable(true);
+		bajaLibroBtn.setDisable(true);
+		editarAlumnoBtn.setDisable(true);
+		devolverBtn.setDisable(true);
 
-			// columnas libros
-			portadaCol.setCellValueFactory(new PropertyValueFactory<Libro, ImageView>("portada"));
-			tituloLibroCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
-			autorCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
-			editorialCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("editorial"));
-			estadoCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("estado"));
-			portadaCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.2));
-			tituloLibroCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.2));
-			autorCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.2));
-			editorialCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.15));
-			estadoCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.25));
+		// columnas libros
+		portadaCol.setCellValueFactory(new PropertyValueFactory<Libro, ImageView>("portada"));
+		tituloLibroCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
+		autorCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
+		editorialCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("editorial"));
+		estadoCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("estado"));
+		portadaCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.2));
+		tituloLibroCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.2));
+		autorCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.2));
+		editorialCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.15));
+		estadoCol.prefWidthProperty().bind(tablaLibros.widthProperty().multiply(0.25));
 
-			// columnas prestamo
+		// columnas prestamo
 
-			alumnoCol.setCellValueFactory(new PropertyValueFactory<PrestamoDatos, String>("alumno"));
-			tituloPrestamoCol.setCellValueFactory(new PropertyValueFactory<PrestamoDatos, String>("titulo"));
-			fechaPrestamoCol.setCellValueFactory(new PropertyValueFactory<PrestamoDatos, Date>("fecha"));
-			alumnoCol.prefWidthProperty().bind(tablaPrestamos.widthProperty().multiply(0.35));
-			tituloPrestamoCol.prefWidthProperty().bind(tablaPrestamos.widthProperty().multiply(0.35));
-			fechaPrestamoCol.prefWidthProperty().bind(tablaPrestamos.widthProperty().multiply(0.3));
+		alumnoCol.setCellValueFactory(new PropertyValueFactory<PrestamoDatos, String>("alumno"));
+		tituloPrestamoCol.setCellValueFactory(new PropertyValueFactory<PrestamoDatos, String>("titulo"));
+		fechaPrestamoCol.setCellValueFactory(new PropertyValueFactory<PrestamoDatos, Date>("fecha"));
+		alumnoCol.prefWidthProperty().bind(tablaPrestamos.widthProperty().multiply(0.35));
+		tituloPrestamoCol.prefWidthProperty().bind(tablaPrestamos.widthProperty().multiply(0.35));
+		fechaPrestamoCol.prefWidthProperty().bind(tablaPrestamos.widthProperty().multiply(0.3));
 
-			// columnas alumno
+		// columnas alumno
 
-			nombreAlumnoCol.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
-			apellido1Col.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellido1"));
-			apellido2Col.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellido2"));
-			nombreAlumnoCol.prefWidthProperty().bind(tablaAlumnos.widthProperty().multiply(0.3));
-			apellido1Col.prefWidthProperty().bind(tablaAlumnos.widthProperty().multiply(0.35));
-			apellido2Col.prefWidthProperty().bind(tablaAlumnos.widthProperty().multiply(0.35));
-
-			tablaAlumnos.setItems(listaAlumnosTabla);
-			lstPrestables.setItems(listaLibrosPrestables);
-			tablaPrestamos.setItems(listaPrestamosTabla);
-			tablaLibros.setItems(listaLibrosTabla);
-		} catch (SQLException e) {
-			Utilidades.mostrarAlertInfo(stage, bundle.getString("err2"));
-		}
+		nombreAlumnoCol.setCellValueFactory(new PropertyValueFactory<Alumno, String>("nombre"));
+		apellido1Col.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellido1"));
+		apellido2Col.setCellValueFactory(new PropertyValueFactory<Alumno, String>("apellido2"));
+		nombreAlumnoCol.prefWidthProperty().bind(tablaAlumnos.widthProperty().multiply(0.3));
+		apellido1Col.prefWidthProperty().bind(tablaAlumnos.widthProperty().multiply(0.35));
+		apellido2Col.prefWidthProperty().bind(tablaAlumnos.widthProperty().multiply(0.35));
 
 	}
 }
